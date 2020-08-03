@@ -66,7 +66,7 @@ exports.getProfile = (req, res, next) => {
 module.exports.signup = async (req, res, next) => {
     try {
         const { firstname,lastname, email, password, } = req.body;
-        
+        const usertype = 1;
         //validation
         //check validation result ก่อน โดย req จะแปะ error validation มาด้วย
         const errors = validationResult(req);
@@ -90,7 +90,7 @@ module.exports.signup = async (req, res, next) => {
         user.email = email;
         user.lastname = lastname;
         user.password = await user.encryptPassword(password);
-
+        user.usertype = usertype;
         await user.save();
 
         res.status(201).json({
@@ -156,12 +156,12 @@ exports.signin = async (req, res, next) => {
 }
 
 module.exports.updateUser = async (req, res) => {
-    const { password, firstname, lastname, gender, education, displayname, profilepicture, certification } = req.body;
+    const { password, firstname, lastname } = req.body;
     const { id } = req.params;
-    const address = [];
-    const location = [];
-    location = req.body;
-    address = req.body;
+    // const address = [];
+    // const location = [];
+    // location = req.body;
+    // address = req.body;
 
     console.log(`Id : ${id}`);
     const user = await User.findOne({ _id: id });
@@ -181,27 +181,27 @@ module.exports.updateUser = async (req, res) => {
    if (lastname) {
         user.lastname = lastname;
    }
-    if (gender) {
-        user.gender = gender;
-    }
-    if (address) {
-        user.address = address;
-    }
-    if (location) {
-        user.location = location;  
-    }
-    if (education) {
-        user.education = education;
-    }
-    if (displayname) {
-        user.displayname = displayname;
-    }
-    if (profilepicture){
-        user.profilepicture = profilepicture;
-    }
-    if (certification){
-        user.certification = certification;
-    }
+    // if (gender) {
+    //     user.gender = gender;
+    // }
+    // if (address) {
+    //     user.address = address;
+    // }
+    // if (location) {
+    //     user.location = location;  
+    // }
+    // if (education) {
+    //     user.education = education;
+    // }
+    // if (displayname) {
+    //     user.displayname = displayname;
+    // }
+    // if (profilepicture){
+    //     user.profilepicture = profilepicture;
+    // }
+    // if (certification){
+    //     user.certification = certification;
+    // }
     
     await user.save();
 
