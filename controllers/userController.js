@@ -2,7 +2,7 @@ const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const config = require('../config/index');
 const User = require("../models/userModel");
-const Guide = require("../models/guideModel")
+const Guide = require('../models/guideModel')
 
 const users = [
     {
